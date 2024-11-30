@@ -1,0 +1,214 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #06283D;
+}
+
+.container {
+    position: relative;
+    width: 400px;
+    height: 600px; 
+    min-height: 100px; 
+    max-height: 150px; 
+    background: #fff;
+    padding: 16px 32px;
+    overflow: hidden;
+    border-radius: 18px;
+    font-family: 'Roboto', sans-serif;
+    transition: max-height 0.6s ease-out, opacity 0.6s ease-out; 
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+}
+
+.container.expanded {
+    max-height: 600px; 
+    opacity: 1;
+}
+
+#result {
+    opacity: 0; 
+    transition: opacity 0.6s ease-out; 
+}
+
+.container.expanded #result {
+    opacity: 1; 
+}
+
+
+.search-box h1{
+    font-size: 32px; 
+    font-weight: bold; 
+    color: #06283D; 
+    margin: 0; 
+    padding-bottom: 10px; 
+    font-family: 'Roboto', sans-serif; 
+    text-transform: capitalize; 
+}
+
+.search-box input {
+    color: #06283D;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 15px; 
+    border: 2px solid #06283D; 
+    border-radius: 8px; 
+    width: 70%; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    outline: none; 
+    transition: border 0.3s ease;
+}
+
+.search-box input:focus {
+    border-color: #17a3ca;
+}
+
+.search-box button {
+    position: absolute;
+    cursor: pointer;
+    width: 18%;
+    height: 45px;
+    color: #fff;
+    background-color: #06283D;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-box button:hover {
+    background-color: #17a3ca; 
+}
+
+.weather-box{
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+    margin-top: -20px; 
+}
+
+.weather-box h2{
+    font-size: 25px;
+    font-weight: bold; 
+    color: #06283D; 
+    text-transform: uppercase; 
+    text-align: center; 
+    letter-spacing: 1px; 
+}
+
+.weather-box .temperature {
+    position: relative;
+    color: #06283D; 
+    font-size: 2.8rem; 
+    font-weight: bold; 
+    margin: 20px auto; 
+    text-align: center; 
+    background-color: #f2f2f2; 
+    border-radius: 10px; 
+    padding: 10px 20px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    width: fit-content; 
+}
+
+.weather-box .temperature span {
+    position: static; 
+    margin-left: 4px; 
+    font-size: 2rem; 
+    color: #06283D; 
+    font-weight: 600; 
+}
+
+.weather-box .description {
+    display: block; 
+    margin-top: 5px; 
+    font-size: 1.5rem;
+    color: #06283D; 
+    font-weight: 600; 
+    text-align: center; 
+    background-color: #f2f2f2; 
+    border-radius: 8px; 
+    padding: 8px 12px; 
+    width: fit-content; 
+    margin-left: auto; 
+    margin-right: auto; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.weather-box .weather-info {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-around; 
+    margin: 20px 0; 
+}
+
+.weather-box img {
+    width: 200px; 
+    height: 200px;
+    margin-right: 20px; 
+    display: block;
+}
+
+.weather-box .weather-details {
+    background-color: #f2f2f2; 
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; 
+    width: 150px;
+    margin-top: 25px;
+    
+}
+
+.weather-box .weather-details p {
+    font-size: 16px; 
+    color: #06283D; 
+    margin: 0; 
+    font-weight: 500; 
+}
+
+.not-found{
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+    scale: 0;
+    opacity: 0;
+    display: none;
+}
+
+.not-found img{
+    width: 70%;
+}
+
+.not-found p{
+    color: #06283D;
+    font-size: 22px;
+    font-weight: 500;
+    margin-top: 12px;
+}
+
+.fadeIn{
+    animation: 0.5s fadeIn forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeIn{
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
