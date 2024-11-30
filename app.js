@@ -93,7 +93,7 @@ function getWeather() {
         <div class="weather-details">
             <p class="humidity">Humidity Level: ${data.humidity}%</p>
             <p class="wind-speed">Wind Speed: ${data.wind_speed} m/s</p>
-            <p class="feelsLike">Feels Like: ${data.feelsLike}°F</p>
+            <p class="feelsLike">Feels Like: ${data.feels_Like}°F</p>
         </div>
     </div>
     <h2>Weather in ${data.city}</h2>
