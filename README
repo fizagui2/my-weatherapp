@@ -1,1 +1,17 @@
+## Main project folder for frontend
+The frontend folder contains all the files responsible for the visual and interactive elements of this project. It serves as the user interface where users can interact with the application.
 
+## Features
+- HTML: Defines the structure and layout of the web pages.
+- CSS: Provides styling for the elements, ensuring the application has a visually appealing and responsive design.
+- JavaScript: Implements interactivity and functionality, including API calls to the backend.
+
+## Examples of Usage
+- The index.html file is the main entry point of the web application and serves the user interface.
+- The style.css file styles elements like buttons, inputs, and the overall layout of the page.
+- The app.js file handles API calls to the backend and dynamically updates the UI based on user input or responses from the backend.
+
+
+
+Maintain the file paths for images, styles, and scripts to ensure the application functions correctly.
+Ensure consistency between the frontend and backend by keeping the API endpoint URLs up to date in the app.js file.
