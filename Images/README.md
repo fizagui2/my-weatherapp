@@ -1,1 +1,1 @@
-
+This folder contains all image assets used by the front-end code of this project. These images are referenced in the HTML, CSS, and JavaScript files to enhance the visual presentation of the website application.
