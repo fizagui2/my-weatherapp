@@ -1,1 +1,15 @@
+## Backend Folder
+- The backend folder contains the Python backend code for this project. This backend serves as the core logic for handling requests, processing data, and interfacing 
+- with external APIs to provide the required functionality to the front-end.
 
+
+## Examples of usage
+- A request to the /weather route with a city name fetches current weather data for the specified location.
+- The backend processes and returns JSON-formatted weather data, including temperature, wind speed, humidity, and condition descriptions.
+- Error handling ensures meaningful error messages are returned in case of API failure or invalid requests.
+
+
+
+
+Ensure the backend.py file is maintained and updated as needed for compatibility with the front-end. Replace the API key or modify the API URL in the code if 
+external services require reconfiguration. Verify the backend is running on the correct port specified in the front-end configuration.
