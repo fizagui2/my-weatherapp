@@ -83,6 +83,12 @@ function getWeather() {
                 case "light intensity drizzle":
                     weatherImage = "Images/rain.png";
                     break;
+                case "moderate rain":
+                    weatherImage = "Images/rain.png";
+                    break;
+                case "mist":
+                    weatherImage = "Images/haze.png";
+                    break;
                     
             }
 
