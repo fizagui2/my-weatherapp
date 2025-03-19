@@ -18,8 +18,8 @@ Ensure consistency between the frontend and backend by keeping the API endpoint 
 
 
 # ===========================================================
-# ACT PC Troubleshooting Tool - Enhanced Version
-# Retrieves System, Network, AD, Log, Performance, and Event Data
+# ACT PC Troubleshooting Tool - Enhanced Version new
+# Retrieves System, Network, AD, Performance, and Event Data
 # Designed to continue running even if some parts fail
 # ===========================================================
 
@@ -55,11 +55,29 @@ function Get-PCInfo {
     # ---------------- Active Directory Information ----------------
     Write-Host "`nChecking Active Directory..." -ForegroundColor Cyan
     try {
-        $ADComputer = Get-ADComputer -Identity $PCName -Properties CanonicalName, Description
-        Write-Host "AD Computer Name: $($ADComputer.Name)"
-        Write-Host "AD Path: $($ADComputer.CanonicalName)"
-        Write-Host "Description: $($ADComputer.Description)"
+        $ADUser = Get-ADUser -Filter {SamAccountName -eq $PCName} -Properties LockedOut, Enabled, PasswordExpired, PasswordLastSet
+        Write-Host "AD Computer Name: $($ADUser.Name)"
+        Write-Host "Account Status: $($ADUser.Enabled -eq $true ? 'Enabled' : 'Disabled')"
+        Write-Host "Lockout Status: $($ADUser.LockedOut -eq $true ? 'Locked' : 'Not Locked')"
+        Write-Host "Password Expiry Date: $(($ADUser.PasswordLastSet).AddDays(90))"
     } catch { Write-Host "⚠ Could not retrieve AD details." -ForegroundColor Yellow }
+
+    # ---------------- System Logs & Troubleshooting ----------------
+    Write-Host "`nFetching System Logs & Troubleshooting Data..." -ForegroundColor Cyan
+    try {
+        # Fetch last shutdown time
+        $LastShutdown = Get-WinEvent -FilterHashtable @{LogName='System'; ID=1074} -MaxEvents 1 | Select-Object -ExpandProperty TimeCreated
+        Write-Host "Last Shutdown: $LastShutdown"
+
+        # Fetch recent system errors
+        $Errors = Get-WinEvent -FilterHashtable @{LogName='System'; Level=2} -MaxEvents 5
+        if ($Errors) {
+            Write-Host "Recent Critical System Errors:"
+            $Errors | ForEach-Object { Write-Host "$($_.TimeCreated) - $($_.Message)" -ForegroundColor Red }
+        } else {
+            Write-Host "✅ No recent system errors detected." -ForegroundColor Green
+        }
+    } catch { Write-Host "⚠ Could not retrieve system logs." -ForegroundColor Yellow }
 
     # ---------------- Test Internet Connectivity ----------------
     Write-Host "`nTesting Internet Connectivity..." -ForegroundColor Cyan
@@ -75,8 +93,8 @@ function Get-PCInfo {
     # ---------------- Check Latency (Ping Test) ----------------
     Write-Host "`nChecking Latency to Google DNS (8.8.8.8)..." -ForegroundColor Cyan
     try {
-        $PingTest = Test-Connection -ComputerName "8.8.8.8" -Count 4
-        $PingTest | ForEach-Object { Write-Host "$($_.Address) - Latency: $($_.ResponseTime) ms" }
+        $PingResults = Test-Connection -ComputerName "8.8.8.8" -Count 4 | Select-Object Address, ResponseTime
+        $PingResults | ForEach-Object { Write-Host "$($_.Address) - Latency: $($_.ResponseTime) ms" }
     } catch { Write-Host "⚠ Could not complete latency test." -ForegroundColor Yellow }
 
     # ---------------- CPU & Memory Usage ----------------
@@ -91,25 +109,14 @@ function Get-PCInfo {
         Write-Host "Memory Usage: $($TotalMemory - $FreeMemory) MB / $TotalMemory MB"
     } catch { Write-Host "⚠ Could not retrieve performance metrics." -ForegroundColor Yellow }
 
-    # ---------------- Check Pending Windows Updates ----------------
-    Write-Host "`nChecking for Pending Windows Updates..." -ForegroundColor Cyan
-    try {
-        $Updates = Invoke-Command -ComputerName $PCName -ScriptBlock { Get-WmiObject -Query "Select * from Win32_QuickFixEngineering" }
-        if ($Updates) {
-            Write-Host "Pending Updates:"
-            $Updates | ForEach-Object { Write-Host "$($_.HotFixID) - Installed: $($_.InstalledOn)" -ForegroundColor Yellow }
-        } else {
-            Write-Host "✅ No pending updates found." -ForegroundColor Green
-        }
-    } catch { Write-Host "⚠ Could not check for updates." -ForegroundColor Yellow }
-
     # ---------------- Check Disk Space ----------------
     Write-Host "`nChecking Disk Space..." -ForegroundColor Cyan
     try {
-        $DiskInfo = Invoke-Command -ComputerName $PCName -ScriptBlock {
-            Get-PSDrive -Name C | Select-Object Used, Free, UsedPercentage
-        }
-        Write-Host "C: Drive Free Space: $($DiskInfo.Free) GB / $($DiskInfo.Used + $DiskInfo.Free) GB"
+        $DiskInfo = Get-PSDrive -Name C | Select-Object Free, Used
+        $FreeGB = [math]::Round($DiskInfo.Free / 1GB, 2)
+        $UsedGB = [math]::Round($DiskInfo.Used / 1GB, 2)
+        $TotalGB = $FreeGB + $UsedGB
+        Write-Host "C: Drive Free Space: $FreeGB GB / $TotalGB GB"
     } catch { Write-Host "⚠ Could not retrieve disk space details." -ForegroundColor Yellow }
 
     # ---------------- Summary ----------------
