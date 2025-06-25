@@ -1,0 +1,179 @@
+
+        <html xmlns:v="urn:schemas-microsoft-com:vml" 
+        xmlns:o="urn:schemas-microsoft-com:office:office" 
+        xmlns:w="urn:schemas-microsoft-com:office:word" 
+        xmlns="http://www.w3.org/TR/REC-html40"> 
+         
+        <head> 
+        <meta http-equiv=Content-Type content="text/html; charset=utf-8"> 
+        <meta name=ProgId content=Word.Document> 
+        <meta name=Generator content="Microsoft Word 9"> 
+        <meta name=Originator content="Microsoft Word 9"> 
+        <!--[if !mso]> 
+        <style> 
+        v\:* {behavior:url(#default#VML);} 
+        o\:* {behavior:url(#default#VML);} 
+        w\:* {behavior:url(#default#VML);} 
+        .shape {behavior:url(#default#VML);} 
+        </style> 
+        <![endif]--> 
+        <title>$this->title</title> 
+        <!--[if gte mso 9]><xml> 
+         <w:WordDocument> 
+          <w:View>Print</w:View> 
+          <w:DoNotHyphenateCaps/> 
+          <w:PunctuationKerning/> 
+          <w:DrawingGridHorizontalSpacing>9.35 pt</w:DrawingGridHorizontalSpacing> 
+          <w:DrawingGridVerticalSpacing>9.35 pt</w:DrawingGridVerticalSpacing> 
+         </w:WordDocument> 
+        </xml><![endif]--> 
+        <style> 
+        <!-- 
+         /* Font Definitions */ 
+        @font-face {
+            font-family: "Calibri (Body)";  /*Verdana;*/ 
+            panose-1:2 11 6 4 3 5 4 4 2 4; 
+            mso-font-charset:0; 
+            mso-generic-font-family:swiss; 
+            mso-font-pitch:variable; 
+            mso-font-signature:536871559 0 0 0 415 0;
+        } 
+        /* Style Definitions */ 
+        p.MsoNormal, li.MsoNormal, div.MsoNormal {
+            mso-style-parent:""; 
+            margin:0in; 
+            margin-bottom:.0001pt; 
+            mso-pagination:widow-orphan; 
+            font-size:7.5pt; 
+            mso-bidi-font-size:8.0pt; 
+            font-family: "Calibri (Body)"; 
+            mso-fareast-font-family: "Calibri (Body)"; 
+        } 
+        p.small {
+            mso-style-parent:""; 
+            margin:0in; 
+            margin-bottom:.0001pt; 
+            mso-pagination:widow-orphan; 
+            font-size:1.0pt; 
+                mso-bidi-font-size:1.0pt; 
+            font-family: "Calibri (Body)"; 
+            mso-fareast-font-family: "Calibri (Body)";
+        } 
+        @page Section1 {
+            size:8.5in 11.0in; 
+            margin:1.0in 1.25in 1.0in 1.25in; 
+            mso-header-margin:.5in; 
+            mso-footer-margin:.5in; 
+            mso-paper-source:0;
+        } 
+        div.Section1 
+            {page:Section1;} 
+        --> 
+        </style> 
+        <!--[if gte mso 9]><xml> 
+         <o:shapedefaults v:ext="edit" spidmax="1032"> 
+          <o:colormenu v:ext="edit" strokecolor="none"/> 
+         </o:shapedefaults></xml><![endif]--><!--[if gte mso 9]><xml> 
+         <o:shapelayout v:ext="edit"> 
+          <o:idmap v:ext="edit" data="1"/> 
+         </o:shapelayout></xml><![endif]--> 
+         <!--$this->htmlHead--> 
+        </head> 
+        <body><h2 style="color: #000000; text-align: center; margin-bottom: 6px;"><span style="font-size: 12pt;">MEDICAL TREATMENT</span></h2>
+<h1 style="color: #000000; text-align: center; margin-top: 0px;">CONSENT FORM</h1>
+<!-- STEP 1 -->
+<table style="border-collapse: collapse; width: 100%; background-color: #000000;">
+<tbody>
+<tr>
+<td width="100%">
+<p style="text-align: center; margin-top: 4px; margin-bottom: 4px;"><span style="color: #ecf0f1;"><strong>STEP 1: PATIENT INFORMATION</strong></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p style="color: #000000; line-height: 150%;">I, ________________ (Patient's Name) of, ________________________________ (address), ___________________________ (city, state, zip), hereby give my consent to the following medical treatment: <em>Provide Procedure/Treatment Name, Description, Date and Time of Procedure/Treatment, and Location.</em></p>
+<!-- STEP 2 -->
+<table style="border-collapse: collapse; width: 100%; background-color: #000000; height: 30.4px;">
+<tbody>
+<tr style="height: 30.4px;">
+<td style="height: 30.4px;" width="100%">
+<p style="text-align: center; margin-top: 4px; margin-bottom: 4px;"><span style="color: #ecf0f1;"><strong>STEP 2: MEDICAL PROVIDER INFORMATION</strong></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p style="color: #000000; line-height: 150%;">I hereby give consent to ________________ (Medical Provider), License No. ________________, of ________________________________ (Provider's Address), to administer the above-mentioned treatment.</p>
+<!-- STEP 3 -->
+<table style="border-collapse: collapse; width: 100%; background-color: #000000;">
+<tbody>
+<tr>
+<td width="100%">
+<p style="text-align: center; margin-top: 4px; margin-bottom: 4px;"><span style="color: #ecf0f1;"><strong>STEP 3: EMERGENCY CONTACT</strong></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<table style="border-collapse: collapse; width: 100%; border: 0px none #FFFFFF;">
+<tbody>
+<tr>
+<td style="width: 60%; text-align: left; border-color: #ffffff; padding-bottom: 16px; padding-left: 0px; padding-right: 0px;">
+<p style="margin-top: 10px; margin-bottom: 0px; border-bottom: 1px solid #000000; padding-bottom: 10px; font-weight: bold;">Contact Name:</p>
+</td>
+<td style="width: 40%; text-align: left; border-color: #ffffff; padding-bottom: 16px; padding-left: 0px; padding-right: 0px;">
+<p style="margin-top: 10px; margin-bottom: 0px; border-bottom: 1px solid #000000; padding-bottom: 10px; font-weight: bold; text-align: left;">Relationship:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<table style="border-collapse: collapse; width: 100%; border: 0px none #FFFFFF;">
+<tbody>
+<tr>
+<td style="width: 100%; text-align: left; border-color: #ffffff; padding-bottom: 16px; padding-left: 0px; padding-right: 0px;">
+<p style="margin-top: 0px; margin-bottom: 0px; border-bottom: 1px solid #000000; padding-bottom: 10px; font-weight: bold;">Phone Number:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- STEP 4 -->
+<table style="border-collapse: collapse; width: 100%; background-color: #000000;">
+<tbody>
+<tr>
+<td width="100%">
+<p style="text-align: center; margin-top: 4px; margin-bottom: 4px;"><span style="color: #ecf0f1;"><strong>STEP 4: CONSENT AND DISCLAIMERS</strong></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p style="color: #000000; line-height: 150%;">I understand that there are risks associated with any medical treatment and that the Medical Provider has explained these risks to me. These may include but are not limited to <em>(list specific risks here)</em>. I acknowledge that no guarantees or assurances have been made to me concerning the results of this treatment.&nbsp;</p>
+<p>Furthermore, I consent to the use and sharing of my personal data for the following purposes <em>(List the purpose(s) for which personal data may be used and shared with third parties, if applicable. e.g. medical research and analysis or referral to specialists).</em></p>
+<!-- STEP 5 -->
+<table style="border-collapse: collapse; width: 100%; background-color: #000000;">
+<tbody>
+<tr>
+<td width="100%">
+<p style="text-align: center; margin-top: 4px; margin-bottom: 4px;"><span style="color: #ecf0f1;"><strong>STEP 5: SIGNATURES</strong></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p style="color: #000000; line-height: 150%;">By signing below, the Patient and Medical Provider acknowledge that they have read and agreed to the terms of this Medical Consent Form.</p>
+<table style="border-collapse: collapse; width: 100%; border: 0px none #FFFFFF;">
+<tbody>
+<tr>
+<td style="width: 65%; text-align: left; border-color: #ffffff; padding-left: 0px; padding-right: 0px;">
+<p style="margin-top: 0px; margin-bottom: 0px; border-bottom: 1px solid #000000; padding-bottom: 10px; font-weight: bold;"><span style="font-weight: 400;">PATIENT SIGNATURE:</span></p>
+</td>
+<td style="width: 35%; text-align: left; border-color: #ffffff; padding-left: 0px; padding-right: 0px;">
+<p style="margin-top: 0px; margin-bottom: 0px; border-bottom: 1px solid #000000; padding-bottom: 10px; font-weight: bold; text-align: left;"><span style="font-weight: 400;">DATE:</span></p>
+</td>
+</tr>
+<tr>
+<td style="width: 65%; text-align: left; border-color: #ffffff; padding-left: 0px; padding-right: 0px; padding-top: 10px;">
+<p style="margin-top: 0px; margin-bottom: 0px; border-bottom: 1px solid #000000; padding-bottom: 10px; font-weight: bold;"><span style="font-weight: 400;">MEDICAL PROVIDER SIGNATURE:</span></p>
+</td>
+<td style="width: 35%; text-align: left; border-color: #ffffff; padding-left: 0px; padding-right: 0px; padding-top: 10px;">
+<p style="margin-top: 0px; margin-bottom: 0px; border-bottom: 1px solid #000000; padding-bottom: 10px; font-weight: bold; text-align: left;"><span style="font-weight: 400;">DATE:</span></p>
+</td>
+</tr>
+</tbody>
+</table></body></html>
