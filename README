@@ -21,24 +21,28 @@ param (
     [string]$ComputerName = $(Read-Host "Enter computer name")
 )
 
-# Set the time filter - logs from the last 3 days
-$startDate = (Get-Date).AddDays(-3)
+# Set time filter (e.g., logs from the last 1 day)
+$startDate = (Get-Date).AddDays(-1)
 
-# Check if the computer is reachable
+# Define a hashtable for remote-side filtering
+$filterHash = @{
+    LogName   = 'System'
+    StartTime = $startDate
+    Level     = 1, 2  # 1 = Critical, 2 = Error
+}
+
+# Test if the remote computer is reachable
 if (Test-Connection -ComputerName $ComputerName -Count 1 -Quiet) {
     Write-Host "`n[$ComputerName] is reachable. Fetching logs since $startDate..." -ForegroundColor Green
 
     try {
-        $events = Get-WinEvent -ComputerName $ComputerName -LogName System -ErrorAction Stop |
-            Where-Object {
-                $_.LevelDisplayName -in @("Critical", "Error") -and
-                $_.TimeCreated -ge $startDate -and
-                $_.Message -match "network|NIC|DNS|DHCP|TCP|IP|adapter"
-            } |
+        # Get the filtered logs from the remote system
+        $events = Get-WinEvent -ComputerName $ComputerName -FilterHashtable $filterHash -ErrorAction Stop |
+            Where-Object { $_.Message -match "network|NIC|DNS|DHCP|TCP|IP|adapter" } |
             Select-Object TimeCreated, Id, LevelDisplayName, ProviderName, Message
 
         if ($events.Count -gt 0) {
-            # Display to terminal with color coding
+            # Output color-coded summary to terminal
             foreach ($event in $events) {
                 $level = $event.LevelDisplayName
                 $color = if ($level -eq "Critical") { "Red" } else { "Yellow" }
@@ -46,10 +50,11 @@ if (Test-Connection -ComputerName $ComputerName -Count 1 -Quiet) {
                 Write-Host "`n[$level] $($event.TimeCreated): $($event.ProviderName) - $($event.Message.Substring(0, [Math]::Min(80, $event.Message.Length)))..." -ForegroundColor $color
             }
 
-            # Also show in a GUI table
-            $events | Out-GridView -Title "Filtered Network Errors on $ComputerName (last 3 days)"
-        } else {
-            Write-Host "`nNo matching network-related errors found in the last 3 days." -ForegroundColor Cyan
+            # Also display the full results in a GUI window
+            $events | Out-GridView -Title "Network-related Errors on $ComputerName (Last 1 Day)"
+        }
+        else {
+            Write-Host "`nNo matching network-related errors found in the last day." -ForegroundColor Cyan
         }
     }
     catch {
