@@ -69,3 +69,188 @@ if (Test-Connection -ComputerName $ComputerName -Count 1 -Quiet) {
 else {
     Write-Host "`n[$ComputerName] is NOT reachable." -ForegroundColor Red
 }
+
+
+
+1 logom
+param (
+    [string]$ComputerName = $(Read-Host "Enter computer name")
+)
+
+$startDate = (Get-Date).AddDays(-1)
+$filterHash = @{
+    LogName   = 'Security'
+    StartTime = $startDate
+    Id        = 4624, 4625, 4648, 4740, 4771
+}
+
+if (Test-Connection -ComputerName $ComputerName -Count 1 -Quiet) {
+    Write-Host "`n[$ComputerName] is reachable. Fetching logon/authentication events..." -ForegroundColor Green
+    try {
+        $events = Get-WinEvent -ComputerName $ComputerName -FilterHashtable $filterHash -ErrorAction Stop |
+            Where-Object {
+                $_.Message -match "logon|failed|login|account|credential|kerberos|trust|NTLM|authentication|domain controller|denied" -or
+                $_.ProviderName -match "Microsoft-Windows-Security-Auditing|Netlogon|Kerberos"
+            } |
+            Select-Object TimeCreated, Id, LevelDisplayName, ProviderName, Message
+
+        if ($events.Count -gt 0) {
+            $events | Out-GridView -Title "Logon & Authentication Failures ($ComputerName)"
+        } else {
+            Write-Host "`nNo logon/auth failures found." -ForegroundColor Cyan
+        }
+    } catch {
+        Write-Host "`nError retrieving logs: $_" -ForegroundColor Red
+    }
+} else {
+    Write-Host "`n[$ComputerName] is not reachable." -ForegroundColor Red
+}
+Read-Host "`nPress Enter to exit..."
+
+
+
+2 system crashes
+param (
+    [string]$ComputerName = $(Read-Host "Enter computer name")
+)
+
+$startDate = (Get-Date).AddDays(-1)
+$filterHash = @{
+    LogName   = 'System'
+    StartTime = $startDate
+    Id        = 41, 6008, 1001, 1000
+}
+
+if (Test-Connection -ComputerName $ComputerName -Count 1 -Quiet) {
+    Write-Host "`n[$ComputerName] is reachable. Fetching system crash/shutdown logs..." -ForegroundColor Green
+    try {
+        $events = Get-WinEvent -ComputerName $ComputerName -FilterHashtable $filterHash -ErrorAction Stop |
+            Where-Object {
+                $_.Message -match "shutdown|unexpected|rebooted|power|bugcheck|crash|hung|restart|blue screen|BSOD|kernel" -or
+                $_.ProviderName -match "Kernel-Power|EventLog|BugCheck|Microsoft-Windows-WER-SystemErrorReporting"
+            } |
+            Select-Object TimeCreated, Id, LevelDisplayName, ProviderName, Message
+
+        if ($events.Count -gt 0) {
+            $events | Out-GridView -Title "System Crashes & Shutdowns ($ComputerName)"
+        } else {
+            Write-Host "`nNo crash/shutdown logs found." -ForegroundColor Cyan
+        }
+    } catch {
+        Write-Host "`nError retrieving logs: $_" -ForegroundColor Red
+    }
+} else {
+    Write-Host "`n[$ComputerName] is not reachable." -ForegroundColor Red
+}
+Read-Host "`nPress Enter to exit..."
+
+
+
+3 application failures
+param (
+    [string]$ComputerName = $(Read-Host "Enter computer name")
+)
+
+$startDate = (Get-Date).AddDays(-1)
+$filterHash = @{
+    LogName   = 'Application'
+    StartTime = $startDate
+    Id        = 1000, 1026, 33, 59, 75
+}
+
+if (Test-Connection -ComputerName $ComputerName -Count 1 -Quiet) {
+    Write-Host "`n[$ComputerName] is reachable. Fetching application error logs..." -ForegroundColor Green
+    try {
+        $events = Get-WinEvent -ComputerName $ComputerName -FilterHashtable $filterHash -ErrorAction Stop |
+            Where-Object {
+                $_.Message -match "crash|faulting|error|application|exception|hung|freeze|stopped working|sidebyside|dll|module|access violation|CLR" -or
+                $_.ProviderName -match "Application Error|.NET Runtime|SideBySide|Application Hang|Windows Error Reporting"
+            } |
+            Select-Object TimeCreated, Id, LevelDisplayName, ProviderName, Message
+
+        if ($events.Count -gt 0) {
+            $events | Out-GridView -Title "Application Failures ($ComputerName)"
+        } else {
+            Write-Host "`nNo app failures found." -ForegroundColor Cyan
+        }
+    } catch {
+        Write-Host "`nError retrieving logs: $_" -ForegroundColor Red
+    }
+} else {
+    Write-Host "`n[$ComputerName] is not reachable." -ForegroundColor Red
+}
+Read-Host "`nPress Enter to exit..."
+
+
+
+4 boot delays
+param (
+    [string]$ComputerName = $(Read-Host "Enter computer name")
+)
+
+$startDate = (Get-Date).AddDays(-1)
+$filterHash = @{
+    LogName   = 'System'
+    StartTime = $startDate
+    Id        = 6005, 4001, 532, 8000
+}
+
+if (Test-Connection -ComputerName $ComputerName -Count 1 -Quiet) {
+    Write-Host "`n[$ComputerName] is reachable. Fetching boot/login performance logs..." -ForegroundColor Green
+    try {
+        $events = Get-WinEvent -ComputerName $ComputerName -FilterHashtable $filterHash -ErrorAction Stop |
+            Where-Object {
+                $_.Message -match "slow|delay|latency|logon|boot|startup|timeout|profile load|script hang" -or
+                $_.ProviderName -match "Winlogon|User Profile Service|GroupPolicy|ShellExperienceHost|Microsoft-Windows-User Profiles"
+            } |
+            Select-Object TimeCreated, Id, LevelDisplayName, ProviderName, Message
+
+        if ($events.Count -gt 0) {
+            $events | Out-GridView -Title "Boot/Login Delays ($ComputerName)"
+        } else {
+            Write-Host "`nNo boot/login delay logs found." -ForegroundColor Cyan
+        }
+    } catch {
+        Write-Host "`nError retrieving logs: $_" -ForegroundColor Red
+    }
+} else {
+    Write-Host "`n[$ComputerName] is not reachable." -ForegroundColor Red
+}
+Read-Host "`nPress Enter to exit..."
+
+
+
+5 gpo
+param (
+    [string]$ComputerName = $(Read-Host "Enter computer name")
+)
+
+$startDate = (Get-Date).AddDays(-1)
+$filterHash = @{
+    LogName   = 'System'
+    StartTime = $startDate
+    Id        = 1058, 1030, 7016, 1502, 1508
+}
+
+if (Test-Connection -ComputerName $ComputerName -Count 1 -Quiet) {
+    Write-Host "`n[$ComputerName] is reachable. Fetching Group Policy logs..." -ForegroundColor Green
+    try {
+        $events = Get-WinEvent -ComputerName $ComputerName -FilterHashtable $filterHash -ErrorAction Stop |
+            Where-Object {
+                $_.Message -match "gpo|group policy|access denied|userenv|apply|processing|DC unreachable|registry|folder redirection|script" -or
+                $_.ProviderName -match "GroupPolicy|Userenv|Folder Redirection|GPClient"
+            } |
+            Select-Object TimeCreated, Id, LevelDisplayName, ProviderName, Message
+
+        if ($events.Count -gt 0) {
+            $events | Out-GridView -Title "Group Policy Failures ($ComputerName)"
+        } else {
+            Write-Host "`nNo GPO logs found." -ForegroundColor Cyan
+        }
+    } catch {
+        Write-Host "`nError retrieving logs: $_" -ForegroundColor Red
+    }
+} else {
+    Write-Host "`n[$ComputerName] is not reachable." -ForegroundColor Red
+}
+Read-Host "`nPress Enter to exit..."
