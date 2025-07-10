@@ -24,11 +24,11 @@ param (
 # Set time filter (e.g., logs from the last 1 day)
 $startDate = (Get-Date).AddDays(-1)
 
-# Define a hashtable for remote-side filtering
+# Define a hashtable for remote-side filtering (Level 1 = Critical, 2 = Error, 3 = Warning)
 $filterHash = @{
     LogName   = 'System'
     StartTime = $startDate
-    Level     = 1, 2  # 1 = Critical, 2 = Error
+    Level     = 1, 2, 3
 }
 
 # Test if the remote computer is reachable
@@ -45,16 +45,21 @@ if (Test-Connection -ComputerName $ComputerName -Count 1 -Quiet) {
             # Output color-coded summary to terminal
             foreach ($event in $events) {
                 $level = $event.LevelDisplayName
-                $color = if ($level -eq "Critical") { "Red" } else { "Yellow" }
+                $color = switch ($level) {
+                    "Critical" { "Red" }
+                    "Error"    { "Yellow" }
+                    "Warning"  { "Cyan" }
+                    Default    { "White" }
+                }
 
                 Write-Host "`n[$level] $($event.TimeCreated): $($event.ProviderName) - $($event.Message.Substring(0, [Math]::Min(80, $event.Message.Length)))..." -ForegroundColor $color
             }
 
             # Also display the full results in a GUI window
-            $events | Out-GridView -Title "Network-related Errors on $ComputerName (Last 1 Day)"
+            $events | Out-GridView -Title "Network-related Logs (Critical/Error/Warning) on $ComputerName (Last 1 Day)"
         }
         else {
-            Write-Host "`nNo matching network-related errors found in the last day." -ForegroundColor Cyan
+            Write-Host "`nNo matching network-related warnings, errors, or critical logs found." -ForegroundColor Cyan
         }
     }
     catch {
